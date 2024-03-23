@@ -27,6 +27,7 @@ public class Service {
             if (loc.getDisplayCountry().equals(countryName))
                 country = loc;
         }
+
         if(country == null){
             throw new RuntimeException("Wrong or unsupported country entered, please try again.");
         }
@@ -37,11 +38,12 @@ public class Service {
         StringBuilder out = new StringBuilder();
         BufferedReader bfin = new BufferedReader(new InputStreamReader(url.openStream()));
         String line;
+
         while ((line = bfin.readLine()) != null) {
             out.append(line);
         }
         bfin.close();
-        //System.out.println(out);
+
         return out.toString();
     }
 

@@ -18,5 +18,6 @@ public class Main {
     System.out.println(rate2);
     // ...
     // część uruchamiająca GUI
+    GUI.createGUI(s, weatherJson, rate1, rate2);
   }
 }
