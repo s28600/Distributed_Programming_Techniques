@@ -15,10 +15,12 @@ public class GUI{
         frame.setBounds(100, 100, 1000, 500);
         frame.setVisible(true);
 
+        frame.setLayout(new BorderLayout());
         JPanel panel = new JPanel(new FlowLayout());
-        frame.add(panel);
+        frame.add(panel, BorderLayout.NORTH);
         JPanel weatherPanel = weatherPanel(service, weatherJson);
         panel.add(weatherPanel);
+
     }
 
     static private JPanel weatherPanel(Service service, String weatherJson){
@@ -37,5 +39,5 @@ public class GUI{
         }
     }
 
-    
+
 }
