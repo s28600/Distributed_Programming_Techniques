@@ -4,6 +4,11 @@ import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonException;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,12 +22,13 @@ public class GUI {
     static JTextField cityField;
     static JTextField currencyField;
     static JPanel infoPanel;
+    static JFXPanel jfxPanel;
 
     public static void createGUI(Service s, String weatherJson, double rate1, double rate2) {
         service = s;
         frame = new JFrame("TPO C02");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBounds(100, 100, 1000, 500);
+        frame.setBounds(100, 100, 1000, 1000);
         frame.setLayout(new BorderLayout());
 
         panel = new JPanel(new FlowLayout());
@@ -53,6 +59,9 @@ public class GUI {
         infoPanel = getInfoPanel(service, weatherJson, rate1, rate2);
         panel.add(infoPanel);
 
+        jfxPanel = getJFXPanel(service);
+        frame.add(jfxPanel, BorderLayout.CENTER);
+
         frame.setVisible(true);
     }
 
@@ -70,6 +79,11 @@ public class GUI {
         panel.remove(infoPanel);
         infoPanel = getInfoPanel(service, newWeatherJson, newRate1, newRate2);
         panel.add(infoPanel);
+
+        frame.remove(jfxPanel);
+        jfxPanel = getJFXPanel(service);
+        frame.add(jfxPanel, BorderLayout.CENTER);
+
         frame.revalidate();
         frame.repaint();
     }
@@ -90,5 +104,19 @@ public class GUI {
         } catch (JsonException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    static private JFXPanel getJFXPanel(Service s){
+        JFXPanel out = new JFXPanel();
+        Platform.runLater(() -> {
+            WebView browser = new WebView();
+            WebEngine webEngine = browser.getEngine();
+            String www = "https://en.wikipedia.org/wiki/" + s.city;
+            webEngine.load(www);
+
+            Scene scene = new Scene(browser);
+            out.setScene(scene);
+        });
+        return out;
     }
 }

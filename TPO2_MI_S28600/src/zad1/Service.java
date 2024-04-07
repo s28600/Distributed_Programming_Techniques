@@ -18,9 +18,10 @@ import java.util.Locale;
 
 public class Service {
     Locale country;
-    private final String WEATHER_API = "https://api.openweathermap.org/data/2.5/weather?q={city name},{country code}&appid=6aa72ca1829d3653da87b87a89438056&units=metric";
-    private final String CURRENCY_API = "https://v6.exchangerate-api.com/v6/7602de87df2af764f1d1b142/latest/";
-    private final String NBP_API = "http://api.nbp.pl/api/exchangerates/rates/{table}/{code}?format=json";
+    String city;
+    private final static String WEATHER_API = "https://api.openweathermap.org/data/2.5/weather?q={city name},{country code}&appid=6aa72ca1829d3653da87b87a89438056&units=metric";
+    private final static String CURRENCY_API = "https://v6.exchangerate-api.com/v6/7602de87df2af764f1d1b142/latest/";
+    private final static String NBP_API = "http://api.nbp.pl/api/exchangerates/rates/{table}/{code}?format=json";
 
     public Service(String countryName) {
         for (Locale loc : Locale.getAvailableLocales()){
@@ -47,11 +48,21 @@ public class Service {
         return out.toString();
     }
 
+    private String getISO(Locale country){
+        for (String str : Locale.getISOCountries()){
+            if (country.getDisplayCountry().equals((new Locale("ENG", str).getDisplayCountry()))){
+                return str;
+            }
+        }
+        return "";
+    }
+
     public String getWeather(String cityName) {
+        city = cityName;
         try {
             return getJson(WEATHER_API
-                    .replace("{city name}", cityName)
-                    .replace("{country code}", country.getISO3Country()));
+                    .replace("{city name}", city)
+                    .replace("{country code}", getISO(country)));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
