@@ -13,5 +13,7 @@ public class Main {
         String output = client.getTranslation("mokry", "EN");
         System.out.println("\nClient side output:");
         System.out.println(output);
+
+        UI ui = new UI(client, mainServer);
     }
 }
