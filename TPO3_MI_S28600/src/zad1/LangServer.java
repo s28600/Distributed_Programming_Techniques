@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class LangServer extends Thread{
-    final String address = "localhost";
+    final String address;
     final String langCode;
     HashMap<String, String> dictionary;
     final int port;
@@ -19,6 +19,7 @@ public class LangServer extends Thread{
         try {
             serverSocket = new ServerSocket(0);
             port = serverSocket.getLocalPort();
+            address = serverSocket.getInetAddress().getHostAddress();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

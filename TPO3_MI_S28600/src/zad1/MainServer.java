@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class MainServer extends Thread{
-    final String address = "localhost";
+    final String address;
     final int port;
     ServerSocket serverSocket;
     final HashMap<String, String[]> langServers;
@@ -16,6 +16,7 @@ public class MainServer extends Thread{
         try {
             serverSocket = new ServerSocket(0);
             port = serverSocket.getLocalPort();
+            address = serverSocket.getInetAddress().getHostAddress();
             System.out.println("Main server started on port " + port);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -62,7 +63,6 @@ public class MainServer extends Thread{
                 System.out.println("MainServer ClientHandler got " + Arrays.toString(input));
 
                 if (!langServers.containsKey(input[1])){
-                    System.out.println("Language is not supported. Aborting...");
                     Socket client = new Socket(socket.getInetAddress().getHostAddress(), Integer.parseInt(input[2]));
                     PrintWriter writer = new PrintWriter(client.getOutputStream(), true);
                     writer.println("Language is not supported.");

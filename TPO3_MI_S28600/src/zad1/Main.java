@@ -10,10 +10,6 @@ public class Main {
         enServer.addTranslation("dom", "house");
         Client client = new Client(mainServer.address, mainServer.port);
 
-        String output = client.getTranslation("mokry", "EN");
-        System.out.println("\nClient side output:");
-        System.out.println(output);
-
         UI ui = new UI(client, mainServer);
     }
 }
