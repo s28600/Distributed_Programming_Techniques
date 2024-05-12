@@ -184,6 +184,10 @@ public class Server {
 				topicsClients.get(request[1]).add(sc);
 				System.out.println("Server: Client subscribed to topic: " + request[1]);
 			}
+			else if (request[0].equals("UNSUBSCRIBE")) {
+				topicsClients.get(request[1]).remove(sc);
+				System.out.println("Server: Client unsubscribed from topic: " + request[1]);
+			}
 			else {
 				// echo do Klienta
 				sc.write(charset.encode(CharBuffer.wrap(reqString)));

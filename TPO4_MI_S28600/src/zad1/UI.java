@@ -62,23 +62,24 @@ public class UI extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("Subscribe")) {
             for (String topic : availableTopicsList.getSelectedValuesList()) {
                 client.subscribe(topic);
-                try {
-                    Thread.sleep(5);
-                } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                }
-                String[] subscribed = client.getSubscriptions().split(" ");
-                subscribedTopicsModel.removeAllElements();
-                if (!subscribed[0].equals("NONE")){
-                    for (var sub : subscribed){
-                        subscribedTopicsModel.addElement(sub);
-                    }
-                }
             }
         } else if (e.getActionCommand().equals("Unsubscribe")) {
             for (String topic : subscribedTopicsList.getSelectedValuesList()) {
-                subscribedTopicsModel.removeElement(topic);
                 client.unsubscribe(topic);
+            }
+        }
+
+        try {
+            Thread.sleep(5);
+        } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        String[] subscribed = client.getSubscriptions().split(" ");
+        subscribedTopicsModel.removeAllElements();
+        if (!subscribed[0].equals("NONE")){
+            for (var sub : subscribed){
+                subscribedTopicsModel.addElement(sub);
             }
         }
     }
