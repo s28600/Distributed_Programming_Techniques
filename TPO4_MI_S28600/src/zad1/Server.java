@@ -148,18 +148,7 @@ public class Server {
 		    System.out.println(reqString);
 			String[] request = cmd.split(" ");
 
-		    if (cmd.equals("Hi")) {
-		    	sc.write(charset.encode(CharBuffer.wrap("Hi")));
-		    }
-		    else if (cmd.equals("Bye")) {           // koniec komunikacji
-
-		    	sc.write(charset.encode(CharBuffer.wrap("Bye")));
-		  	  	System.out.println("Serwer: mówię \"Bye\" do klienta ...\n\n");
-
-		  	  	sc.close();                      // - zamknięcie kanału
-		        sc.socket().close();			 // i gniazda
-
-		    } else if (request[0].equals("TOPICS")) {
+		    if (request[0].equals("TOPICS")) {
 				StringBuilder stringBuilder = new StringBuilder();
 				for (var topic : topicsClients.keySet()){
 					stringBuilder.append(topic).append(" ");
@@ -187,10 +176,6 @@ public class Server {
 			else if (request[0].equals("UNSUBSCRIBE")) {
 				topicsClients.get(request[1]).remove(sc);
 				System.out.println("Server: Client unsubscribed from topic: " + request[1]);
-			}
-			else {
-				// echo do Klienta
-				sc.write(charset.encode(CharBuffer.wrap(reqString)));
 			}
 	 
 	    } catch (Exception exc) { // przerwane polączenie?
