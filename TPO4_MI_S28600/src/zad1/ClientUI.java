@@ -79,6 +79,20 @@ public class ClientUI extends JFrame implements ActionListener {
             throw new RuntimeException(ex);
         }
 
+        String[] topics = client.getTopics().split(" ");
+        availableTopicsModel.removeAllElements();
+        if (!topics[0].equals("NONE")){
+            for (var sub : topics){
+                availableTopicsModel.addElement(sub);
+            }
+        }
+
+        try {
+            Thread.sleep(5);
+        } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
+
         String[] subscribed = client.getSubscriptions().split(" ");
         subscribedTopicsModel.removeAllElements();
         if (!subscribed[0].equals("NONE")){

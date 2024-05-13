@@ -169,6 +169,10 @@ public class Server {
 				System.out.println("Server: Sending topics to client...");
 				sc.write(charset.encode(CharBuffer.wrap(stringBuilder.toString())));
 			}
+			else if (request[0].equals("ADDTOPIC")) {
+				topicsClients.putIfAbsent(request[1], new HashSet<>());
+				System.out.println("Server: Admin added topic: " + request[1]);
+			}
 			else if (request[0].equals("SUBSCRIBE")) {
 				topicsClients.get(request[1]).add(sc);
 				System.out.println("Server: Client subscribed to topic: " + request[1]);

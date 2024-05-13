@@ -54,8 +54,22 @@ public class AdminUI extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("Add")) {
             String newTopic = newTopicField.getText().trim();
             if (!newTopic.isEmpty()) {
-                availableTopicsModel.addElement(newTopic);
+                admin.addTopic(newTopic);
                 newTopicField.setText("");
+            }
+        }
+
+        try {
+            Thread.sleep(5);
+        } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        String[] subscribed = admin.getTopics().split(" ");
+        availableTopicsModel.removeAllElements();
+        if (!subscribed[0].equals("NONE")){
+            for (var sub : subscribed){
+                availableTopicsModel.addElement(sub);
             }
         }
     }
