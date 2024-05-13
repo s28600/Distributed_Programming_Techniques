@@ -14,7 +14,7 @@ public class AdminUI extends JFrame implements ActionListener {
 
     public AdminUI(Administrator admin) {
         this.admin = admin;
-        setTitle("Topic Subscription");
+        setTitle("Admin");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
 
@@ -22,9 +22,10 @@ public class AdminUI extends JFrame implements ActionListener {
         JPanel availableTopicsPanel = new JPanel(new BorderLayout());
         JLabel availableLabel = new JLabel("Available Topics");
         availableTopicsModel = new DefaultListModel<>();
-        availableTopicsModel.addElement("Topic 1");
-        availableTopicsModel.addElement("Topic 2");
-        availableTopicsModel.addElement("Topic 3");
+        String[] topics = admin.getTopics().split(" ");
+        for (var topic : topics){
+            availableTopicsModel.addElement(topic);
+        }
         availableTopicsList = new JList<>(availableTopicsModel);
         availableTopicsPanel.add(availableLabel, BorderLayout.NORTH);
         availableTopicsPanel.add(new JScrollPane(availableTopicsList), BorderLayout.CENTER);

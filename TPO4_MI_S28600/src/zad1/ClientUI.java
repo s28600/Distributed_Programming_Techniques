@@ -14,7 +14,7 @@ public class ClientUI extends JFrame implements ActionListener {
 
     public ClientUI(Client client) {
         this.client = client;
-
+        setTitle("Client");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
 
