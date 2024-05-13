@@ -179,10 +179,10 @@ public class Server {
 			}
 	 
 	    } catch (Exception exc) { // przerwane polączenie?
-	    	exc.printStackTrace();
 	        try {
 				sc.close();
 				sc.socket().close();
+				System.out.println("\nConnection closed.");
 	        } catch (Exception e) {}
 	    }
 	    

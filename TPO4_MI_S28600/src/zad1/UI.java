@@ -42,10 +42,14 @@ public class UI extends JFrame implements ActionListener {
         JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton subscribeButton = new JButton("Subscribe");
         JButton unsubscribeButton = new JButton("Unsubscribe");
+        JButton refreshButton = new JButton("Refresh");
         subscribeButton.addActionListener(this);
         unsubscribeButton.addActionListener(this);
+        refreshButton.addActionListener(this);
         buttonPanel.add(subscribeButton);
         buttonPanel.add(unsubscribeButton);
+        buttonPanel.add(refreshButton);
+
 
         // Main Panel
         JPanel mainPanel = new JPanel(new GridLayout(3, 1));
