@@ -5,14 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UI extends JFrame implements ActionListener {
+public class ClientUI extends JFrame implements ActionListener {
     Client client;
     private DefaultListModel<String> availableTopicsModel;
     private DefaultListModel<String> subscribedTopicsModel;
     private JList<String> availableTopicsList;
     private JList<String> subscribedTopicsList;
 
-    public UI(Client client) {
+    public ClientUI(Client client) {
         this.client = client;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
