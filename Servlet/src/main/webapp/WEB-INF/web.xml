@@ -1,4 +1,4 @@
-<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app>
     <servlet>
         <servlet-name>RequestServlet</servlet-name>
@@ -8,7 +8,6 @@
         <servlet-name>RequestServlet</servlet-name>
         <url-pattern>/request</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>SearchServlet</servlet-class>
@@ -17,7 +16,7 @@
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
-    
+
     <servlet>
         <servlet-name>ResponseServlet</servlet-name>
         <servlet-class>ResponseServlet</servlet-class>
