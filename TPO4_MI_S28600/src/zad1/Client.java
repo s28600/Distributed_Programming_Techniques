@@ -38,7 +38,7 @@ public class Client {
 
 	public String getTopics() {
 		try {
-			System.out.println("Client: Sending request for available topics...");
+			System.out.println("\nClient: Sending request for available topics...");
 			channel.write(charset.encode("TOPICS\n"));
 			return readResponse();
 		} catch (IOException e) {
@@ -48,6 +48,7 @@ public class Client {
 
 	public void subscribe(String topic) {
         try {
+			System.out.println("\nClient: Sending request to subscribe to topic: " + topic);
             channel.write(charset.encode("SUBSCRIBE " + topic + "\n"));
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -56,6 +57,7 @@ public class Client {
 
 	public void unsubscribe(String topic) {
 		try {
+			System.out.println("\nClient: Sending request to unsubscribe from topic: " + topic);
 			channel.write(charset.encode("UNSUBSCRIBE " + topic + "\n"));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -64,7 +66,7 @@ public class Client {
 
 	public String getSubscriptions() {
 		try {
-			System.out.println("Client: Sending request for subscribed topics...");
+			System.out.println("\nClient: Sending request for subscribed topics...");
 			channel.write(charset.encode("SUBSCRIPTIONS\n"));
 			return readResponse();
 		} catch (IOException e) {
@@ -74,7 +76,7 @@ public class Client {
 
 	public String readResponse(){
 		try {
-			CharBuffer cbuf = null;
+			CharBuffer cbuf = CharBuffer.wrap("");
 			while (true) {
 				inBuf.clear();	// opróżnienie bufora wejściowego
 				int readBytes = channel.read(inBuf); // czytanie nieblokujące
@@ -83,15 +85,12 @@ public class Client {
 
 				// System.out.println("readBytes =  " + readBytes);
 
-				if (readBytes == 0) {
-					continue;
-				}
-				else if (readBytes == -1) { // kanał zamknięty po stronie serwera
+				if (readBytes == -1) { // kanał zamknięty po stronie serwera
 					// dalsze czytanie niemożlwe
 					// ...
 					break;
 				}
-				else {		// dane dostępne w buforze
+				else if (readBytes != 0) {		// dane dostępne w buforze
 					//System.out.println("coś jest od serwera");
 
 					inBuf.flip();	// przestawienie bufora
@@ -103,7 +102,7 @@ public class Client {
 
 					String odSerwera = cbuf.toString();
 
-					System.out.println("Klient: serwer właśnie odpisał ... " + odSerwera);
+					System.out.println("Client: Server response: " + odSerwera);
 					cbuf.clear();
 
 					break;
