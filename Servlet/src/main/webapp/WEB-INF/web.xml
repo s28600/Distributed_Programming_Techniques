@@ -1,0 +1,29 @@
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+    <servlet>
+        <servlet-name>RequestServlet</servlet-name>
+        <servlet-class>RequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RequestServlet</servlet-name>
+        <url-pattern>/request</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>SearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ResponseServlet</servlet-name>
+        <servlet-class>ResponseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResponseServlet</servlet-name>
+        <url-pattern>/response</url-pattern>
+    </servlet-mapping>
+</web-app>
