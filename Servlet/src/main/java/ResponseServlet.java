@@ -10,6 +10,9 @@ import java.util.List;
 public class ResponseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+
         List<Car> cars = (List<Car>) req.getAttribute("cars");
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
